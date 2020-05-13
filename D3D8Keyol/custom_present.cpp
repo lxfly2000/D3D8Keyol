@@ -14,7 +14,7 @@
 #endif
 
 #ifndef _X86_
-#error 64bit building is not supported.
+#error x64 platform is not supported.
 #endif
 
 ID3DXFont* pFont = nullptr;//经测试D3DXFont在此处不能创建多次
@@ -88,7 +88,7 @@ public:
 
 		LOGFONT df;
 		ZeroMemory(&df, sizeof(LOGFONT));
-		df.lfHeight = -MulDiv(_wtoi(font_size), GetDeviceCaps(GetDC(NULL), LOGPIXELSY), 72);//此处不能直接用字体大小，需要将字体大小换算成GDI的逻辑单元大小
+		df.lfHeight = -MulDiv(_wtoi(font_size), USER_DEFAULT_SCREEN_DPI, 72);//此处不能直接用字体大小，需要将字体大小换算成GDI的逻辑单元大小
 		df.lfWidth = 0;
 		df.lfWeight = font_weight;
 		df.lfItalic = false;
